@@ -13,4 +13,5 @@ export default defineNuxtConfig({
     "@nuxt/hints",
     "nuxt-auth-utils",
   ],
+  css: ["~/assets/css/main.css"],
 });
