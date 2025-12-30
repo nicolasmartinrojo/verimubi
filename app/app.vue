@@ -2,9 +2,7 @@
   <NuxtLayout>
     <UApp>
       <UHeader>
-        <template #left>
-          {{ user }}
-        </template>
+        <template #left> User: {{ user.email }} </template>
 
         <template #right>
           <UButton
