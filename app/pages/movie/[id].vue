@@ -4,7 +4,7 @@
       <UHeader>
         <template #left>Movie Detail </template>
         <template #right>
-          <NuxtLink to="/dashboard">Back to movie list</NuxtLink>
+          <NuxtLink to="/">Back to movie list</NuxtLink>
         </template>
       </UHeader>
       <UPageHeader :title="`${movie.Title} (${movie.Year})`" />

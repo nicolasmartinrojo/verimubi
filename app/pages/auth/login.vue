@@ -66,7 +66,7 @@ const onSubmit = async () => {
       },
     });
     await refreshUserSession();
-    await navigateTo("/dashboard");
+    await navigateTo("/");
   } catch (_error) {
     const err = _error as NuxtError;
     errorMessage.value = err.statusMessage as string;
