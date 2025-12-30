@@ -4,7 +4,7 @@
       <UHeader>
         <template #left>Movie Detail </template>
         <template #right>
-          <NuxtLink to="/dashboard/view">Back to movie list</NuxtLink>
+          <NuxtLink to="/dashboard">Back to movie list</NuxtLink>
         </template>
       </UHeader>
       <UPageHeader :title="`${movie.Title} (${movie.Year})`" />
@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ middleware: ["authenticated"] });
 const route = useRoute();
 const { id } = route.params;
 
