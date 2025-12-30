@@ -39,8 +39,7 @@
       <UAlert
         color="error"
         variant="subtle"
-        title="Heads up!"
-        :description="errorMessage"
+        :title="errorMessage"
         v-if="errorMessage"
         icon="i-lucide-terminal"
       />
@@ -48,6 +47,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { NuxtError } from "#app";
 import type { BlogPostProps } from "@nuxt/ui";
 
 interface MoviesRes {
@@ -58,11 +58,18 @@ const cards = ref<BlogPostProps[]>([]);
 const search = ref("");
 const errorMessage = ref("");
 const onSubmit = async () => {
+  errorMessage.value = "";
+  cards.value = [];
   try {
     const { data: resMovies } = await useFetch<MoviesRes>("/api/movies", {
       query: { search: search.value },
     });
-    if (!resMovies.value?.Search) return;
+    if (!resMovies.value?.Search) {
+      throw createError({
+        statusCode: 401,
+        statusMessage: "Movie not found",
+      });
+    }
 
     cards.value = resMovies.value?.Search.map((resMovie) => ({
       title: resMovie.Title,
@@ -70,10 +77,9 @@ const onSubmit = async () => {
       image: resMovie.Poster,
       to: `/movie/${resMovie.imdbID}`,
     }));
-  } catch (error) {
-    debugger;
-    const err = error as { Response: string; Error: string };
-    errorMessage.value = err.Error as string;
+  } catch (_error) {
+    const err = _error as NuxtError;
+    errorMessage.value = err.message as string;
   }
 };
 </script>
