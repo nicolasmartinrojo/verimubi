@@ -1,9 +1,19 @@
 <template>
-  <div>
-    <NuxtLink to="login">login 1 </NuxtLink>
-    <NuxtLink to="login"> login 2</NuxtLink>
-    <slot />
+  <UApp>
+    <UHeader>
+      <template #left> Welcome to VeriMubi </template>
+    </UHeader>
+
+    <UMain>
+      <slot />
+    </UMain>
+
     <USeparator icon="i-simple-icons-nuxtdotjs" />
-  </div>
+
+    <UFooter>
+      <template #left>
+        <p class="text-sm text-muted"></p>
+      </template>
+    </UFooter>
+  </UApp>
 </template>
-<script setup lang="ts"></script>

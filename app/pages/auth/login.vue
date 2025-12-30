@@ -1,10 +1,35 @@
 <template>
   <div>
-    login
     <form @submit.prevent="onSubmit">
-      <input type="email" v-model="email" placeholder="Email" />
-      <input type="password" v-model="password" placeholder="Password" />
-      <button @click="onSubmit">Login</button>
+      <UContainer class="w-100 pt-8">
+        <UPageCard title="Login">
+          <UFormField label="Email" required>
+            <UInput
+              size="xl"
+              class="w-full"
+              type="email"
+              v-model="email"
+              placeholder="Email"
+            />
+          </UFormField>
+          <UFormField label="Password" required>
+            <UInput
+              size="xl"
+              class="w-full"
+              type="password"
+              v-model="password"
+              placeholder="Password"
+            />
+          </UFormField>
+          <UButton
+            type="submit"
+            size="xl"
+            class="w-full flex fit-content flex justify-center"
+          >
+            Login
+          </UButton>
+        </UPageCard>
+      </UContainer>
     </form>
   </div>
 </template>
@@ -13,6 +38,9 @@
 import type { NuxtError } from "#app";
 definePageMeta({
   layout: "auth-layout",
+});
+useSeoMeta({
+  title: "Verimubi - Login",
 });
 const { fetch: refreshUserSession } = useUserSession();
 const email = ref("nicolas.martin.rojo@gmail.com");
