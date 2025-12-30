@@ -35,14 +35,6 @@
     <UContainer>
       <UPageGrid>
         <UBlogPost v-for="(card, index) in cards" v-bind="card" :key="index" />
-        <!-- <UPageCard
-          v-for="(card, index) in cards"
-          :key="index"
-          v-bind="card"
-          variant="subtle"
-        >
-          <img :src="card.image" alt="Tailwind CSS" class="w-full" />
-        </UPageCard> -->
       </UPageGrid>
     </UContainer>
   </div>

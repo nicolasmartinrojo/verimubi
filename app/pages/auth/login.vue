@@ -11,6 +11,9 @@
 
 <script setup lang="ts">
 import type { NuxtError } from "#app";
+definePageMeta({
+  layout: "auth-layout",
+});
 const { fetch: refreshUserSession } = useUserSession();
 const email = ref("nicolas.martin.rojo@gmail.com");
 const password = ref("123123");
