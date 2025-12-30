@@ -32,11 +32,20 @@
     </UPageHero>
     <UContainer>
       <UPageGrid>
-        <UPageCard
-          v-for="(movie, index) in movies"
-          :key="index"
-          v-bind="movie"
+        <UBlogPost
+          v-for="(card, index) in cards"
+          v-bind="card"
+          v-key="index"
+          target="_blank"
         />
+        <!-- <UPageCard
+          v-for="(card, index) in cards"
+          :key="index"
+          v-bind="card"
+          variant="subtle"
+        >
+          <img :src="card.image" alt="Tailwind CSS" class="w-full" />
+        </UPageCard> -->
       </UPageGrid>
     </UContainer>
   </div>
@@ -47,7 +56,7 @@ import type { NuxtError } from "#app";
 interface MoviesRes {
   Search: Movie[];
 }
-const movies = ref([]);
+const cards = ref([]);
 
 const search = ref("");
 const onSubmit = async () => {
@@ -56,10 +65,10 @@ const onSubmit = async () => {
       query: { search: search.value },
     });
     if (resMovies) {
-      movies.value = resMovies.value?.Search.map((resMovie) => ({
+      cards.value = resMovies.value?.Search.map((resMovie) => ({
         title: resMovie.Title,
-        description: resMovie.Year,
-        icon: "i-lucide-smile",
+        date: resMovie.Year,
+        image: resMovie.Poster,
         to: `/movie/${resMovie.imdbID}`,
       }));
     }
