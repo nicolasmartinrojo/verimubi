@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // db_file_name: process.env.NUXT_DB_FILE_NAME || "file:local.db",
     db_file_name: process.env.NUXT_DB_FILE_NAME,
+    omdb_api_key: process.env.NUXT_OMDB_API_KEY,
   },
   modules: [
     "@nuxt/ui",
