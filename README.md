@@ -1,8 +1,6 @@
-# Nuxt Minimal Starter
+# Setup
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
+## Install dependencies
 
 Make sure to install dependencies:
 
@@ -38,38 +36,18 @@ yarn dev
 bun run dev
 ```
 
-## Production
+# Nico's configuration
 
-Build the application for production:
+## .env used
 
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```
+NUXT_SESSION_PASSWORD="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+NUXT_DB_FILE_NAME=file:local.db
+NUXT_OMDB_API_KEY='c6bfa3ef'
 ```
 
-Locally preview production build:
+## User and Password for login
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+nicolas.martin.rojo@gmail.com // 123123
+```
