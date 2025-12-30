@@ -3,21 +3,17 @@
     <UApp>
       <UHeader>
         <template #left>
-          <NuxtLink to="/">
-            <AppLogo class="w-auto h-6 shrink-0" />
-          </NuxtLink>
-
-          <TemplateMenu />
+          {{ user }}
         </template>
 
         <template #right>
           <UButton
-            to="https://github.com/nuxt-ui-templates/starter"
             target="_blank"
-            icon="i-simple-icons-github"
-            aria-label="GitHub"
-            color="neutral"
+            icon="i-lucide-x"
+            aria-label="Logout"
+            color="primary"
             variant="ghost"
+            @click="logout"
           />
         </template>
       </UHeader>
@@ -30,20 +26,7 @@
 
       <UFooter>
         <template #left>
-          <p class="text-sm text-muted">
-            Built with Nuxt UI • © {{ new Date().getFullYear() }}
-          </p>
-        </template>
-
-        <template #right>
-          <UButton
-            to="https://github.com/nuxt-ui-templates/starter"
-            target="_blank"
-            icon="i-simple-icons-github"
-            aria-label="GitHub"
-            color="neutral"
-            variant="ghost"
-          />
+          <p class="text-sm text-muted"></p>
         </template>
       </UFooter>
     </UApp>
@@ -51,15 +34,13 @@
 </template>
 
 <script setup>
-useHead({
-  meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
-  link: [{ rel: "icon", href: "/favicon.ico" }],
-  htmlAttrs: {
-    lang: "en",
-  },
-});
-
 useSeoMeta({
   title: "Verimubi - verifarma",
 });
+const { user, clear: clearUserSession } = useUserSession();
+console.log(user);
+const logout = async () => {
+  await clearUserSession();
+  await navigateTo("/auth/login");
+};
 </script>

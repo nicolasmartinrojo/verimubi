@@ -15,11 +15,6 @@ const { fetch: refreshUserSession } = useUserSession();
 const email = ref("nicolas.martin.rojo@gmail.com");
 const password = ref("123123");
 
-const bodySchema = z.object({
-  email: z.email().trim().toLowerCase(),
-  password: z.string().min(6),
-});
-
 const onSubmit = async () => {
   try {
     await $fetch("/api/auth/login", {
