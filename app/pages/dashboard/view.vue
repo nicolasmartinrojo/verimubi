@@ -11,13 +11,19 @@
     >
       <UContainer class="flex flex-row">
         <div class="basis-5/6">
-          <UInput size="xl" placeholder="Search..." class="w-full" />
+          <UInput
+            size="xl"
+            placeholder="Search..."
+            class="w-full"
+            v-model="search"
+          />
         </div>
         <div class="basis-1/6 flex px-1">
           <UButton
             type="submit"
             size="xl"
             class="w-full flex fit-content flex justify-center"
+            @click="onSubmit"
           >
             Submit
           </UButton>
@@ -26,47 +32,43 @@
     </UPageHero>
     <UContainer>
       <UPageGrid>
-        <UPageCard v-for="(card, index) in cards" :key="index" v-bind="card" />
+        <UPageCard
+          v-for="(movie, index) in movies"
+          :key="index"
+          v-bind="movie"
+        />
       </UPageGrid>
     </UContainer>
   </div>
 </template>
 <script setup lang="ts">
-const cards = ref([
-  {
-    title: "Icons",
-    description:
-      "Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.",
-    icon: "i-lucide-smile",
-    to: "/docs/getting-started/integrations/icons",
-  },
-  {
-    title: "Icons",
-    description:
-      "Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.",
-    icon: "i-lucide-smile",
-    to: "/docs/getting-started/integrations/icons",
-  },
-  {
-    title: "Icons",
-    description:
-      "Nuxt UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.",
-    icon: "i-lucide-smile",
-    to: "/docs/getting-started/integrations/icons",
-  },
-  {
-    title: "Fonts",
-    description:
-      "Nuxt UI integrates with Nuxt Fonts to provide plug-and-play font optimization.",
-    icon: "i-lucide-a-large-small",
-    to: "/docs/getting-started/integrations/fonts",
-  },
-  {
-    title: "Color Mode",
-    description:
-      "Nuxt UI integrates with Nuxt Color Mode to switch between light and dark.",
-    icon: "i-lucide-sun-moon",
-    to: "/docs/getting-started/integrations/color-mode",
-  },
-]);
+import type { NuxtError } from "#app";
+
+interface MoviesRes {
+  Search: Movie[];
+}
+const movies = ref([]);
+
+const search = ref("");
+const onSubmit = async () => {
+  try {
+    const { data: resMovies } = await useFetch<MoviesRes>("/api/movies", {
+      query: { search: search.value },
+    });
+    if (resMovies) {
+      movies.value = resMovies.value?.Search.map((resMovie) => ({
+        title: resMovie.Title,
+        description: resMovie.Year,
+        icon: "i-lucide-smile",
+        to: `/movie/${resMovie.imdbID}`,
+      }));
+    }
+  } catch (error) {
+    const err = error as NuxtError;
+    console.log({
+      message: err.statusMessage,
+      code: err.statusCode,
+    });
+  }
+};
 </script>
