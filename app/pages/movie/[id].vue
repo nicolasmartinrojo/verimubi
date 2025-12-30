@@ -1,7 +1,32 @@
 <template>
-  <div>
-    <div>{{ id }}</div>
-    <div>{{ movie }}</div>
+  <div v-if="movie">
+    <UContainer>
+      <UHeader>
+        <template #left>
+          <UPageHeader :title="id" />
+        </template>
+        <template #right>
+          <h2>Volver a la lista</h2>
+        </template>
+      </UHeader>
+      <UPageCard :title="`${movie.Title}(${movie.Year})`" variant="subtle">
+        <UPageGrid>
+          <UCard
+            v-for="rating in movie.Ratings"
+            :title="rating.Source"
+            :description="rating.Value"
+            variant="subtle"
+          >
+            <template #header>
+              {{ rating.Source }}
+            </template>
+            <template #default>
+              {{ rating.Value }}
+            </template>
+          </UCard>
+        </UPageGrid>
+      </UPageCard>
+    </UContainer>
   </div>
 </template>
 
@@ -9,5 +34,5 @@
 const route = useRoute();
 const { id } = route.params;
 
-const movie = await useFetch<Movie>(`/api/movies/${id}`);
+const { data: movie } = await useFetch<MovieFull>(`/api/movies/${id}`);
 </script>
