@@ -2,14 +2,19 @@
   <div v-if="movie">
     <UContainer>
       <UHeader>
-        <template #left>
-          <UPageHeader :title="id" />
-        </template>
+        <template #left>Movie Detail </template>
         <template #right>
-          <h2>Volver a la lista</h2>
+          <NuxtLink to="/dashboard/view">Back to movie list</NuxtLink>
         </template>
       </UHeader>
-      <UPageCard :title="`${movie.Title}(${movie.Year})`" variant="subtle">
+      <UPageHeader :title="`${movie.Title} (${movie.Year})`" />
+      <UPageCard variant="subtle">
+        <div v-for="key in movieKeys">
+          <b>
+            {{ key }}
+          </b>
+          : {{ movie[key] }}
+        </div>
         <UPageGrid>
           <UCard
             v-for="rating in movie.Ratings"
@@ -35,4 +40,18 @@ const route = useRoute();
 const { id } = route.params;
 
 const { data: movie } = await useFetch<MovieFull>(`/api/movies/${id}`);
+const movieKeys: (keyof MovieFull)[] = [
+  "Actors",
+  "Plot",
+  "Country",
+  "Awards",
+  "Writer",
+  "Metascore",
+  "imdbRating",
+  "imdbVotes",
+  "DVD",
+  "BoxOffice",
+  "Production",
+  "Website",
+];
 </script>
