@@ -32,12 +32,7 @@
     </UPageHero>
     <UContainer>
       <UPageGrid>
-        <UBlogPost
-          v-for="(card, index) in cards"
-          v-bind="card"
-          v-key="index"
-          target="_blank"
-        />
+        <UBlogPost v-for="(card, index) in cards" v-bind="card" :key="index" />
         <!-- <UPageCard
           v-for="(card, index) in cards"
           :key="index"
@@ -52,11 +47,12 @@
 </template>
 <script setup lang="ts">
 import type { NuxtError } from "#app";
+import type { BlogPostProps } from "@nuxt/ui";
 
 interface MoviesRes {
   Search: Movie[];
 }
-const cards = ref([]);
+const cards = ref<BlogPostProps[]>([]);
 
 const search = ref("");
 const onSubmit = async () => {
@@ -64,14 +60,14 @@ const onSubmit = async () => {
     const { data: resMovies } = await useFetch<MoviesRes>("/api/movies", {
       query: { search: search.value },
     });
-    if (resMovies) {
-      cards.value = resMovies.value?.Search.map((resMovie) => ({
-        title: resMovie.Title,
-        date: resMovie.Year,
-        image: resMovie.Poster,
-        to: `/movie/${resMovie.imdbID}`,
-      }));
-    }
+    if (!resMovies.value?.Search) return;
+
+    cards.value = resMovies.value?.Search.map((resMovie) => ({
+      title: resMovie.Title,
+      date: resMovie.Year,
+      image: resMovie.Poster,
+      to: `/movie/${resMovie.imdbID}`,
+    }));
   } catch (error) {
     const err = error as NuxtError;
     console.log({
