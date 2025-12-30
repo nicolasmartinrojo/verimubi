@@ -44,7 +44,9 @@ export default eventHandler(async (event) => {
   }
 
   await setUserSession(event, {
-    email: email,
+    user: {
+      email: email,
+    },
   });
   return { message: "login successful" };
   //   const [newUser] = await db
