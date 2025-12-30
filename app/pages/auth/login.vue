@@ -37,6 +37,17 @@
             v-if="errorMessage"
             icon="i-lucide-terminal"
           />
+          <UAlert
+            color="neutral"
+            variant="subtle"
+            title="Click to autocomplete dummy data"
+            icon="i-lucide-terminal"
+            @click="
+              password = '123123';
+              email = 'nicolas.martin.rojo@gmail.com';
+            "
+          >
+          </UAlert>
         </UPageCard>
       </UContainer>
     </form>
@@ -52,8 +63,8 @@ useSeoMeta({
   title: "Verimubi - Login",
 });
 const { fetch: refreshUserSession } = useUserSession();
-const email = ref("nicolas.martin.rojo@gmail.com");
-const password = ref("123123");
+const email = ref("");
+const password = ref("");
 const errorMessage = ref("");
 
 const onSubmit = async () => {
