@@ -32,14 +32,14 @@ export default eventHandler(async (event) => {
   if (!existingUser) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Invalid --mail or password",
+      statusMessage: "Invalid mail or password",
     });
   }
   const isPasswordValid = await verifyPassword(existingUser.password, password);
   if (!isPasswordValid) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Invalid mail or --password",
+      statusMessage: "Invalid mail or password",
     });
   }
 

@@ -28,6 +28,15 @@
           >
             Login
           </UButton>
+
+          <UAlert
+            color="error"
+            variant="subtle"
+            title="Heads up!"
+            :description="errorMessage"
+            v-if="errorMessage"
+            icon="i-lucide-terminal"
+          />
         </UPageCard>
       </UContainer>
     </form>
@@ -45,6 +54,7 @@ useSeoMeta({
 const { fetch: refreshUserSession } = useUserSession();
 const email = ref("nicolas.martin.rojo@gmail.com");
 const password = ref("123123");
+const errorMessage = ref("");
 
 const onSubmit = async () => {
   try {
@@ -57,9 +67,10 @@ const onSubmit = async () => {
     });
     await refreshUserSession();
     await navigateTo("/dashboard");
-  } catch (error) {
-    const err = error as NuxtError;
-    console.log({
+  } catch (_error) {
+    const err = _error as NuxtError;
+    errorMessage.value = err.statusMessage as string;
+    console.error({
       message: err.statusMessage,
       code: err.statusCode,
     });
