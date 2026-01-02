@@ -1,0 +1,9 @@
+node_modules
+.output
+.nuxt
+dist
+/.git
+/.vscode
+.env
+pnpm-store
+.DS_Store
