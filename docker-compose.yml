@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      args:
+        NUXT_SESSION_PASSWORD: ${NUXT_SESSION_PASSWORD}
+        NUXT_OMDB_API_KEY: ${NUXT_OMDB_API_KEY}
+        NUXT_DB_FILE_NAME: ${NUXT_DB_FILE_NAME}
+    image: verimubi:local
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app:ro
+    restart: unless-stopped

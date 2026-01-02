@@ -51,3 +51,61 @@ NUXT_OMDB_API_KEY='c6bfa3ef'
 ```
 nicolas.martin.rojo@gmail.com // 123123
 ```
+
+## Comandos útiles (Docker)
+
+A continuación hay comandos útiles para construir, ejecutar y compartir la imagen Docker de la aplicación.
+
+Construir y levantar con docker compose:
+
+```bash
+# Usa tu .env o crea uno desde .env.example
+docker compose up --build
+```
+
+Levantar en background (detached):
+
+```bash
+docker compose up --build -d
+```
+
+Ver logs:
+
+```bash
+docker compose logs --follow
+```
+
+Parar y eliminar contenedores/recursos creados por compose:
+
+```bash
+docker compose down
+```
+
+Exportar la imagen a un archivo tar para compartir:
+
+```bash
+docker save verimubi:local -o verimubi.tar
+```
+
+Taggear y subir a un registro (ej. Docker Hub):
+
+```bash
+# reemplaza yourrepo/verimubi por tu repositorio
+docker tag verimubi:local yourrepo/verimubi:latest
+docker push yourrepo/verimubi:latest
+```
+
+Eliminar imagen localmente:
+
+```bash
+docker image rm verimubi:local
+```
+
+Inspeccionar contenedores y estado:
+
+```bash
+docker ps -a
+docker inspect <container-id>
+```
+
+Si necesitás que agregue instrucciones para `docker secret` o CI/CD, decime y las añado.
