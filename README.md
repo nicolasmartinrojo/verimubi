@@ -101,6 +101,35 @@ Eliminar imagen localmente:
 docker image rm verimubi:local
 ```
 
+Descargar y ejecutar desde Docker Hub (ejemplo para `nicolasrojo/verimubi`):
+
+```bash
+# Pull desde Docker Hub
+docker pull docker.io/nicolasrojo/verimubi:latest
+
+# Ejecutar la imagen en el puerto 3000
+docker run -p 3000:3000 \
+	-e NUXT_SESSION_PASSWORD '<una-clave-larga-de-32-o-mas-caracteres>' \
+	-e NUXT_DB_FILE_NAME 'file:local.db' \
+	-e NUXT_OMDB_API_KEY '<tu-omdb-api-key>' \
+	--name verimubi-run \
+	docker.io/nicolasrojo/verimubi:latest
+```
+
+Etiquetas alternativas:
+
+```bash
+# Tag semántica / versión
+docker tag verimubi:local docker.io/nicolasrojo/verimubi:v1.0.0
+docker push docker.io/nicolasrojo/verimubi:v1.0.0
+```
+
+Notas:
+
+- Asegurate de usar una contraseña para `NUXT_SESSION_PASSWORD` de al menos 32 caracteres (requisito de Nitro para sesiones).
+- El `NUXT_DB_FILE_NAME` apunta a un archivo SQLite local; si corres en contenedor considera montar un volumen para persistencia.
+- Si el repositorio es privado, ejecuta `docker login` antes de `docker push`.
+
 Inspeccionar contenedores y estado:
 
 ```bash
