@@ -109,11 +109,11 @@ docker pull docker.io/nicolasrojo/verimubi:latest
 
 # Ejecutar la imagen en el puerto 3000
 docker run -p 3000:3000 \
-	-e NUXT_SESSION_PASSWORD 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' \
-	-e NUXT_DB_FILE_NAME 'file:local.db' \
-	-e NUXT_OMDB_API_KEY '<tu-omdb-api-key>' \
-	--name verimubi-run \
-	docker.io/nicolasrojo/verimubi:latest
+  -e NUXT_SESSION_PASSWORD='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' \
+  -e NUXT_DB_FILE_NAME='file:local.db' \
+  -e NUXT_OMDB_API_KEY='c6bfa3ef' \
+  --name verimubi-run \
+  docker.io/nicolasrojo/verimubi:latest
 ```
 
 Etiquetas alternativas:
