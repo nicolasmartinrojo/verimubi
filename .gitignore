@@ -23,3 +23,5 @@ logs
 .env.*
 !.env.example
 verimubi.tar
+
+pnpm-lock.yaml
