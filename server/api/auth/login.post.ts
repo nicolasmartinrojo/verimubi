@@ -7,8 +7,7 @@
 // });
 
 import { eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/sqlite";
-import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/libsql";
 import z from "zod";
 import { usersTable } from "~~/server/database/schema";
 
@@ -23,11 +22,7 @@ export default eventHandler(async (event) => {
   // 2.revisar si el usuario ya existe
 
   const { db_file_name } = useRuntimeConfig();
-  const sqlitePath = db_file_name?.startsWith("file:")
-    ? db_file_name.replace("file:", "")
-    : db_file_name;
-  const sqlite = new Database(sqlitePath || "local.db");
-  const db = drizzle(sqlite);
+  const db = drizzle(db_file_name);
   const existingUser = await db
     .select()
     .from(usersTable)
