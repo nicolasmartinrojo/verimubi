@@ -50,6 +50,7 @@
 import type { NuxtError } from "#app";
 import type { BlogPostProps } from "@nuxt/ui";
 
+definePageMeta({ middleware: ["authenticated"] });
 interface MoviesRes {
   Search: Movie[];
 }
