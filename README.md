@@ -109,7 +109,7 @@ docker pull docker.io/nicolasrojo/verimubi:latest
 
 # Ejecutar la imagen en el puerto 3000
 docker run -p 3000:3000 \
-	-e NUXT_SESSION_PASSWORD '<una-clave-larga-de-32-o-mas-caracteres>' \
+	-e NUXT_SESSION_PASSWORD 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' \
 	-e NUXT_DB_FILE_NAME 'file:local.db' \
 	-e NUXT_OMDB_API_KEY '<tu-omdb-api-key>' \
 	--name verimubi-run \
@@ -136,5 +136,3 @@ Inspeccionar contenedores y estado:
 docker ps -a
 docker inspect <container-id>
 ```
-
-Si necesitás que agregue instrucciones para `docker secret` o CI/CD, decime y las añado.
